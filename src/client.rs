@@ -257,7 +257,15 @@ impl Client {
     ///
     /// <https://developers.yubico.com/YubiHSM2/Commands/Device_Info.html>
     pub fn device_info(&self) -> Result<device::Info, Error> {
-        Ok(self.send_command(DeviceInfoCommand {})?.into())
+        let message = command::Message::create(command::Code::DeviceInfo, Vec::new())?;
+
+        let response_body = self
+            .connector
+            .send_message(uuid::new_v4(), message.into())?;
+        let response_message = crate::response::Message::parse(response_body)?;
+        let device_info_response: DeviceInfoResponse = deserialize(&response_message.data)?;
+
+        Ok(device_info_response.into())
     }
 
     /// Echo a message sent to the HSM.
