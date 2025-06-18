@@ -20,7 +20,7 @@ rust-version = "1.83"
 aes = { version = "0.9.0-pre.2", features = ["zeroize"] }
 bitflags = "2"
 cmac = "=0.8.0-pre.2"
-cbc = "=0.2.0-pre.2"
+cbc = "0.2.0-pre.2"
 ccm = { version = "0.5", features = ["std"] }
 digest = { version = "=0.11.0-pre.9", default-features = false }
 ecdsa = { version = "=0.17.0-pre.9", default-features = false, features = ["pkcs8"] }
